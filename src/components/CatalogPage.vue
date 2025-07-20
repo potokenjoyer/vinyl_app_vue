@@ -11,7 +11,7 @@
         :author="record.author"
         :price="record.price"
         :show-button="true"
-        @buy="handleBuy"
+        @buy="addToCart"
       />
     </div>
 
@@ -22,8 +22,9 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
 import ProductCard from "../components/ProductCard.vue";
+import { ref } from "vue";
+import { useCartStore } from "../stores/cart";
 
 const records = [
   {
@@ -31,28 +32,28 @@ const records = [
     title: "Scaps",
     description: "Музыка для тех, кто слушает не ушами, а вниманием.",
     author: "The Steve Lacy Sextet",
-    price: "₽ 1790 ",
+    price: 1790,
   },
   {
     image: "/product2.jpeg",
     title: "Down Home Piano",
     description: "Сны на виниле: электроника, соул и немного магии.",
     author: "Mose Allison",
-    price: "₽ 2100 ",
+    price: 2100,
   },
   {
     image: "product3.jpeg",
     title: "Duo 1",
     description: "Грувовый фанк с винтажным звучанием. Идеально для вечеринок.",
     author: "Anthony Braxton",
-    price: "₽ 2390 ",
+    price: 2390,
   },
   {
     image: "/product4.jpeg",
     title: "My Baby Has Gone",
     description: "Тёплый аналоговый звук и душевные вибрации.",
     author: "Little Miss Jessie",
-    price: "₽ 1990",
+    price: 1990,
   },
   {
     image: "/product5.jpeg",
@@ -60,7 +61,7 @@ const records = [
     description:
       "Синтвейв и ретроатмосфера — пластинка в духе старых VHS-кассет.",
     author: "Carolyne Mas",
-    price: "₽ 1900",
+    price: 1900,
   },
   {
     image: "/product6.jpeg",
@@ -68,44 +69,43 @@ const records = [
     description:
       "Органичный эмбиент и звуки природы, обработанные через ленты и лампы.",
     author: "Dee Dee Sharp",
-    price: "₽ 2500",
+    price: 2500,
   },
   {
     image: "/product7.jpeg",
     title: "Freeway",
-    description:
-      "Глубокий бас и ночной неон — саундтрек мегаполиса под дождём.",
+    description: "Глубокий бас и ночной неон — саундтрек мегаполиса под дождём.",
     author: "Philadelphia Freeway",
-    price: "₽ 2700",
+    price: 2700,
   },
   {
     image: "/product8.jpeg",
     title: "Defari",
-    description:
-      "Хаус и трип-хоп в одной пластинке. Заброшенные сигналы прошлого.",
+    description: "Хаус и трип-хоп в одной пластинке. Заброшенные сигналы прошлого.",
     author: "Spell My Name / Slumpy",
-    price: "₽ 2200",
+    price: 2200,
   },
 ];
 
+const cartStore = useCartStore();
+
 const notificationVisible = ref(false);
-const lastAddedTitle = ref('');
+const lastAddedTitle = ref("");
 let timeoutId = null;
 
-function handleBuy(product) {
-  lastAddedTitle.value = product.title || 'Товар';
+function addToCart(product) {
+  cartStore.addToCart(product);
+  lastAddedTitle.value = product.title;
 
   notificationVisible.value = false;
+  clearTimeout(timeoutId);
 
   setTimeout(() => {
     notificationVisible.value = true;
-  }, 20);
-
-  if (timeoutId) clearTimeout(timeoutId);
-
-  timeoutId = setTimeout(() => {
-    notificationVisible.value = false;
-  }, 3000);
+    timeoutId = setTimeout(() => {
+      notificationVisible.value = false;
+    }, 3000);
+  }, 50);
 }
 </script>
 
@@ -116,7 +116,6 @@ function handleBuy(product) {
   padding: 0 20px;
   font-family: "Nunito Sans", sans-serif;
   text-align: center;
-  position: relative;
 }
 
 .catalog-wrapper h1 {
@@ -140,7 +139,6 @@ function handleBuy(product) {
   padding: 12px 20px;
   border-radius: 8px;
   font-size: 14px;
-  font-weight: 600;
   z-index: 1000;
   animation: fadeInOut 3s forwards;
 }

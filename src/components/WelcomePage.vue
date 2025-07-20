@@ -6,11 +6,13 @@
         title="Midnight Needle"
         description="
 Сборник тёплого аналогового звука, пропитанного джазовыми интонациями, лоу-фай ритмами и лёгкой хрипотцой старого проигрывателя"
+price="1790"
       />
       <ProductCard
         image="/product1.jpg"
         title="Spins & Dreams"
         description="Пластинка с атмосферной электроникой, соулом и кинематографическими мелодиями, будто созданными для ночных прогулок и размышлений."
+        price="2100"
       />
     </div>
 
@@ -33,7 +35,6 @@
 
 <script setup>
 import ProductCard from "./ProductCard.vue";
-import Header from "./Header.vue";
 import { useRouter } from "vue-router";
 
 const router = useRouter();

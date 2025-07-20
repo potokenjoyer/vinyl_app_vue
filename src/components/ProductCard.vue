@@ -5,7 +5,7 @@
     <h2>{{ author }}</h2>
     <p class="description">{{ description }}</p>
 
-    <p class="price">{{ price }}</p>
+    <p class="price">{{ price }} ₽</p>
     <button v-if="showButton" class="buy-button" @click="handleBuy">
       Купить
     </button>
@@ -25,14 +25,14 @@ const props = defineProps({
   },
 });
 
-const emit = defineEmits(['buy']);
+const emit = defineEmits(["buy"]);
 
 function handleBuy() {
-  emit('buy', {
+  emit("buy", {
     image: props.image,
     title: props.title,
     description: props.description,
-    price: Number(props.price), // желательно приводить к числу
+    price: props.price,
     author: props.author,
   });
 }

@@ -2,13 +2,13 @@
   <div class="cart-page">
     <h1>Корзина</h1>
 
-    <div v-if="cart.length === 0">
+    <div v-if="cartStore.cart.length === 0">
       <p>Ваша корзина пуста.</p>
     </div>
 
     <div v-else>
       <ul class="cart-items">
-        <li v-for="(item, index) in cart" :key="index" class="cart-item">
+        <li v-for="(item, index) in cartStore.cart" :key="index" class="cart-item">
           <img :src="item.image" alt="Обложка" />
           <div class="info">
             <h2>{{ item.title }}</h2>
@@ -18,35 +18,17 @@
       </ul>
 
       <div class="summary">
-        <p>Товаров: {{ cart.length }}</p>
-        <p>Итого: {{ totalPrice }} ₽</p>
+        <p>Товаров: {{ cartStore.cart.length }}</p>
+        <p>Итого: {{ cartStore.totalPrice }} ₽</p>
         <button>Оформить заказ</button>
       </div>
     </div>
   </div>
 </template>
 
-<script>
-export default {
-  name: 'CartPage',
-  data() {
-    return {
-      cart: [
-        {
-          title: 'Midnight Needle',
-          price: 4999,
-          image: '/product1.jpg',
-        },
-
-      ],
-    };
-  },
-  computed: {
-    totalPrice() {
-      return this.cart.reduce((sum, item) => sum + Number(item.price), 0);
-    },
-  },
-};
+<script setup>
+import { useCartStore } from "../stores/cart";
+const cartStore = useCartStore();
 </script>
 
 <style scoped>
