@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <Header />
+
+
     <div class="about-wrapper">
       <div class="about-box">
         <h1>О МАГАЗИНЕ</h1>
@@ -26,7 +26,7 @@
         </p>
       </div>
     </div>
-  </div>
+
 </template>
 
 <script setup>

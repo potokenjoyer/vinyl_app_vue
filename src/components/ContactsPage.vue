@@ -1,6 +1,4 @@
 <template>
-  <div>
-    <Header />
     <div class="contacts-wrapper">
       <div class="contacts-box">
         <h1>КОНТАКТЫ</h1>
@@ -11,7 +9,6 @@
       </div>
 <h1 style="font-size: 60px;">33 <br>SPINS </br></h1>
     </div>
-  </div>
 </template>
 
 <script setup>

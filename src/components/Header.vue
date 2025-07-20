@@ -8,7 +8,7 @@
       <a href="#" class="nav-link" @click="goToContacts">КОНТАКТЫ</a>
     </nav>
 
-    <div class="cart">КОРЗИНА</div>
+    <div class="cart" @click="goToCart">КОРЗИНА</div>
   </header>
 </template>
 
@@ -28,6 +28,9 @@ function goToContacts() {
 }
 function goToCatalog() {
   router.push("/catalog");
+}
+function goToCart() {
+  router.push("/cart");
 }
 </script>
 

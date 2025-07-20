@@ -1,27 +1,29 @@
 <template>
-  <div>
-    <Header />
-    <div class="catalog-wrapper">
-      <h1>КАТАЛОГ ПЛАСТИНОК</h1>
-      <div class="catalog-grid">
-        <ProductCard
-          v-for="(record, index) in records"
-          :key="index"
-          :image="record.image"
-          :title="record.title"
-          :description="record.description"
-          :author="record.author"
-          :price="record.price"
-          :show-button="true"
-        />
-      </div>
+  <div class="catalog-wrapper">
+    <h1>КАТАЛОГ ПЛАСТИНОК</h1>
+    <div class="catalog-grid">
+      <ProductCard
+        v-for="(record, index) in records"
+        :key="index"
+        :image="record.image"
+        :title="record.title"
+        :description="record.description"
+        :author="record.author"
+        :price="record.price"
+        :show-button="true"
+        @buy="handleBuy"
+      />
+    </div>
+
+    <div v-if="notificationVisible" class="notification">
+      Товар "{{ lastAddedTitle }}" добавлен в корзину
     </div>
   </div>
 </template>
 
 <script setup>
+import { ref } from 'vue'
 import ProductCard from "../components/ProductCard.vue";
-import Header from "./Header.vue";
 
 const records = [
   {
@@ -85,6 +87,26 @@ const records = [
     price: "₽ 2200",
   },
 ];
+
+const notificationVisible = ref(false);
+const lastAddedTitle = ref('');
+let timeoutId = null;
+
+function handleBuy(product) {
+  lastAddedTitle.value = product.title || 'Товар';
+
+  notificationVisible.value = false;
+
+  setTimeout(() => {
+    notificationVisible.value = true;
+  }, 20);
+
+  if (timeoutId) clearTimeout(timeoutId);
+
+  timeoutId = setTimeout(() => {
+    notificationVisible.value = false;
+  }, 3000);
+}
 </script>
 
 <style scoped>
@@ -94,6 +116,7 @@ const records = [
   padding: 0 20px;
   font-family: "Nunito Sans", sans-serif;
   text-align: center;
+  position: relative;
 }
 
 .catalog-wrapper h1 {
@@ -106,5 +129,38 @@ const records = [
   flex-wrap: wrap;
   gap: 60px;
   justify-content: center;
+}
+
+.notification {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #222;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  z-index: 1000;
+  animation: fadeInOut 3s forwards;
+}
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  10% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  90% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
 }
 </style>

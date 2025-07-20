@@ -1,35 +1,32 @@
 <template>
-  <div>
-    <Header />
-    <div class="welcome-container">
-      <div class="products">
-        <ProductCard
-          image="/product1.jpg"
-          title="Midnight Needle"
-          description="
+  <div class="welcome-container">
+    <div class="products">
+      <ProductCard
+        image="/product1.jpg"
+        title="Midnight Needle"
+        description="
 Сборник тёплого аналогового звука, пропитанного джазовыми интонациями, лоу-фай ритмами и лёгкой хрипотцой старого проигрывателя"
-        />
-        <ProductCard
-          image="/product1.jpg"
-          title="Spins & Dreams"
-          description="Пластинка с атмосферной электроникой, соулом и кинематографическими мелодиями, будто созданными для ночных прогулок и размышлений."
-        />
-      </div>
+      />
+      <ProductCard
+        image="/product1.jpg"
+        title="Spins & Dreams"
+        description="Пластинка с атмосферной электроникой, соулом и кинематографическими мелодиями, будто созданными для ночных прогулок и размышлений."
+      />
+    </div>
 
-      <div class="info">
-        <h1>
-          КОГДА ВРАЩАЕТСЯ ДИСК <br />
-          <span class="bold">ЗАПИСЬ ОЖИВАЕТ</span><br />
-          <span class="bold">А ДУША</span><br />
-          <span class="bold">УНОСИТСЯ В ВЕЧНОСТЬ</span>
-        </h1>
-        <p>
-          Винил — звук с душой и характером. Каждый трек — живое воспоминание,
-          каждое вращение — магия момента. Погрузись в атмосферу настоящей
-          музыки — почувствуй винил!
-        </p>
-        <button @click="goToAbout">Узнать больше</button>
-      </div>
+    <div class="info">
+      <h1>
+        КОГДА ВРАЩАЕТСЯ ДИСК <br />
+        <span class="bold">ЗАПИСЬ ОЖИВАЕТ</span><br />
+        <span class="bold">А ДУША</span><br />
+        <span class="bold">УНОСИТСЯ В ВЕЧНОСТЬ</span>
+      </h1>
+      <p>
+        Винил — звук с душой и характером. Каждый трек — живое воспоминание,
+        каждое вращение — магия момента. Погрузись в атмосферу настоящей музыки
+        — почувствуй винил!
+      </p>
+      <button @click="goToAbout">Узнать больше</button>
     </div>
   </div>
 </template>

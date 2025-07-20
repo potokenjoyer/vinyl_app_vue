@@ -13,17 +13,29 @@
 </template>
 
 <script setup>
-defineProps({
+const props = defineProps({
   image: String,
   title: String,
   description: String,
-  price: String,
+  price: [String, Number],
   author: String,
   showButton: {
     type: Boolean,
     default: false,
   },
 });
+
+const emit = defineEmits(['buy']);
+
+function handleBuy() {
+  emit('buy', {
+    image: props.image,
+    title: props.title,
+    description: props.description,
+    price: Number(props.price), // желательно приводить к числу
+    author: props.author,
+  });
+}
 </script>
 
 <style scoped>
@@ -32,6 +44,7 @@ defineProps({
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
 }
 
 .product-card img {
@@ -74,7 +87,7 @@ defineProps({
 }
 
 .buy-button:hover {
-  background: black;
+  background: rgb(255, 59, 59);
   color: white;
 }
 </style>
